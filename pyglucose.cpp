@@ -72,7 +72,9 @@ PYBIND11_MODULE(pyglucose, m) {
       .def(py::self == py::self)
       .def(py::self != py::self)
       .def(~py::self)
-      .def(py::self ^ bool());
+      .def(py::self ^ bool())
+      .def_property_readonly_static("Undef", [](py::object /* self */) { return Glucose::lit_Undef; })
+      .def_property_readonly_static("Error", [](py::object /* self */) { return Glucose::lit_Error; });
 
     auto Solver_class = py::class_<Solver>(m, "Solver")
       .def(py::init<>())
