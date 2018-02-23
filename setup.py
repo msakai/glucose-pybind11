@@ -33,6 +33,10 @@ ext_modules = [
             get_pybind_include(),
             get_pybind_include(user=True)
         ],
+        define_macros=[
+            ('INCREMENTAL', '1'),
+            ('INCREMNENTAL', '1'),
+        ],
         language='c++'
     ),
 ]
