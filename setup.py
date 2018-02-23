@@ -24,11 +24,11 @@ ext_modules = [
     Extension(
         'pyglucose',
         ['pyglucose.cpp',
-         'glucose/core/Solver.cc',
-         'glucose/simp/SimpSolver.cc'
+         'glucose-syrup-4.1/core/Solver.cc',
+         'glucose-syrup-4.1/simp/SimpSolver.cc'
         ],
         include_dirs=[
-            "glucose",
+            "glucose-syrup-4.1",
             # Path to pybind11 headers
             get_pybind_include(),
             get_pybind_include(user=True)
