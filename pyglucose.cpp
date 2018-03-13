@@ -108,7 +108,7 @@ PYBIND11_MODULE(pyglucose, m) {
           return solver.solveLimited(ls);
         },
         py::call_guard<py::gil_scoped_release>())
-      .def("solve", py::overload_cast<>(&Solver::solve))
+      .def("solve", py::overload_cast<>(&Solver::solve), py::call_guard<py::gil_scoped_release>())
       .def("okay", &Solver::okay)
 
       // Convenience versions of 'toDimacs()'
