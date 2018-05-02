@@ -79,6 +79,8 @@ PYBIND11_MODULE(pyglucose, m) {
     auto Solver_class = py::class_<Solver>(m, "Solver")
       .def(py::init<>())
       .def("clone", &Solver::clone)
+      .def("__copy__", &Solver::clone)
+      .def("__deepcopy__", [](Solver &solver, py::object memo) { return solver.clone(); })
 
       // Problem specification:
       .def("new_var", &Solver::newVar, py::arg("polarity") = true, py::arg("dvar") = true)
