@@ -36,7 +36,7 @@ before_install:
   if [ "$TRAVIS_OS_NAME" = "linux" ]; then export CXX=g++-5 CC=gcc-5; fi
   if [ -n "$PYTHON" ]; then
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-      brew update; brew install python3;
+      brew update; brew upgrade python;
     fi
   elif [ -n "$CONDA" ]; then
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then OS=Linux-x86_64; else OS=MacOSX-x86_64; fi
