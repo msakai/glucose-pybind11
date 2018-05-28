@@ -166,6 +166,23 @@ PYBIND11_MODULE(pyglucose, m) {
                     [](Solver &solver) { return solver.showModel; },
                     [](Solver &solver, bool flag) { solver.showModel = flag; }
                     )
+
+      // Statistics
+      /*
+      .def_property_readonly("stats", [](Solver &solver) {
+	    std::vector<uint64_t> ret;
+	    for (int i = 0; i < solver.stats.size(); i++)
+	        ret.push_back(solver.stats[i]);
+	    return ret;
+	})
+      */
+      // Important stats completely related to search. Keep here
+      .def_readonly("solves", &Solver::solves)
+      .def_readonly("starts", &Solver::starts)
+      .def_readonly("decisions", &Solver::decisions)
+      .def_readonly("propagations", &Solver::propagations)
+      .def_readonly("conflicts", &Solver::conflicts)
+      .def_readonly("conflictsRestarts", &Solver::conflictsRestarts)
       ;
 
     py::class_<SimpSolver, Solver>(m, "SimpSolver")
