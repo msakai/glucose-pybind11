@@ -40,8 +40,8 @@ for clause in cs:
     solver.add_clause([ls[l] if l > 0 else ~ls[-l] for l in clause])
 solver.verbosity = 1
 solver.solve()
-if solver.okay():
+if solver.okay:
     print("SAT")
-    print(solver.model())
+    print(solver.model)
 else:
     print("UNSAT")
