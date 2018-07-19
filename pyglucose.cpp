@@ -67,8 +67,8 @@ PYBIND11_MODULE(pyglucose, m) {
 
     auto Lit_class = py::class_<Lit>(m, "Lit")
       .def(py::init(&Glucose::mkLit), py::arg("var"), py::arg("sign") = false)
-      .def("sign", &Glucose::sign)
-      .def("var", &Glucose::var)
+      .def_property_readonly("sign", &Glucose::sign)
+      .def_property_readonly("var", &Glucose::var)
       .def(py::self == py::self)
       .def(py::self != py::self)
       .def(~py::self)
@@ -111,7 +111,7 @@ PYBIND11_MODULE(pyglucose, m) {
         },
         py::call_guard<py::gil_scoped_release>())
       .def("solve", py::overload_cast<>(&Solver::solve), py::call_guard<py::gil_scoped_release>())
-      .def("okay", &Solver::okay)
+      .def_property_readonly("okay", &Solver::okay)
 
       // Convenience versions of 'toDimacs()'
       .def("to_dimacs", py::overload_cast<const char*>(&Solver::toDimacs))
@@ -125,16 +125,16 @@ PYBIND11_MODULE(pyglucose, m) {
       .def("value", py::overload_cast<Lit>(&Solver::value, py::const_))
       .def("model_value", py::overload_cast<Var>(&Solver::modelValue, py::const_))
       .def("model_value", py::overload_cast<Lit>(&Solver::modelValue, py::const_))
-      .def("nassigns", &Solver::nAssigns)
-      .def("nclauses", &Solver::nClauses)
-      .def("nlearnts", &Solver::nLearnts)
-      .def("nvars", &Solver::nVars)
-      .def("nfreevars", &Solver::nFreeVars)
+      .def_property_readonly("nassigns", &Solver::nAssigns)
+      .def_property_readonly("nclauses", &Solver::nClauses)
+      .def_property_readonly("nlearnts", &Solver::nLearnts)
+      .def_property_readonly("nvars", &Solver::nVars)
+      .def_property_readonly("nfreevars", &Solver::nFreeVars)
 
       // Incremental mode
       .def("set_incremental_mode", &Solver::setIncrementalMode)
       .def("init_nb_initial_vars", &Solver::initNbInitialVars)
-      .def("is_incremental", &Solver::isIncremental)
+      .def_property_readonly("is_incremental", &Solver::isIncremental)
 
       // Resource contraints:
       .def("set_conf_budget", &Solver::setConfBudget)
@@ -146,13 +146,13 @@ PYBIND11_MODULE(pyglucose, m) {
       // Memory managment:
 
       // Extra results: (read-only member variable)
-      .def("model", [](Solver &solver) {
+      .def_property_readonly("model", [](Solver &solver) {
             std::vector<lbool> ret;
             for (int i = 0; i < solver.model.size(); i++)
                 ret.push_back(solver.model[i]);
             return ret;
         })
-      .def("conflict", [](Solver &solver) {
+      .def_property_readonly("conflict", [](Solver &solver) {
             std::vector<Lit> ret;
             for (int i = 0; i < solver.conflict.size(); i++)
                 ret.push_back(solver.conflict[i]);
