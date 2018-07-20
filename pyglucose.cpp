@@ -67,6 +67,10 @@ PYBIND11_MODULE(pyglucose, m) {
 
     auto Lit_class = py::class_<Lit>(m, "Lit")
       .def(py::init(&Glucose::mkLit), py::arg("var"), py::arg("sign") = false)
+      .def("__str__", [](Lit &lit) {
+          return std::string("Lit(") + std::to_string(Glucose::var(lit)) + "," +
+	    (Glucose::sign(lit) ? "True" : "False") + ")";
+       })
       .def_property_readonly("sign", &Glucose::sign)
       .def_property_readonly("var", &Glucose::var)
       .def(py::self == py::self)
