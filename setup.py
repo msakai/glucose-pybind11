@@ -99,6 +99,8 @@ setup(
     name='pyglucose',
     version=__version__,
     author='Masahiro Sakai',
+    author_email = "masahiro.sakai@gmail.com",
+    url = "https://github.com/msakai/glucose-pybind11",
     description='pybind11-based binding of glucose SAT solver',
     long_description='',
     ext_modules=ext_modules,
