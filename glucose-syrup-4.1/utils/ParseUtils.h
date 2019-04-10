@@ -25,13 +25,14 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include <stdio.h>
 #include <math.h>
 
-#include <zlib.h>
+// #include <zlib.h>
 
 namespace Glucose {
 
 //-------------------------------------------------------------------------------------------------
 // A simple buffered character stream class:
 
+/*
 static const int buffer_size = 1048576;
 
 
@@ -53,13 +54,14 @@ public:
     void operator ++ ()       { pos++; assureLookahead(); }
     int  position    () const { return pos; }
 };
+*/
 
 
 //-------------------------------------------------------------------------------------------------
 // End-of-file detection functions for StreamBuffer and char*:
 
 
-static inline bool isEof(StreamBuffer& in) { return *in == EOF;  }
+//static inline bool isEof(StreamBuffer& in) { return *in == EOF;  }
 static inline bool isEof(const char*   in) { return *in == '\0'; }
 
 //-------------------------------------------------------------------------------------------------
