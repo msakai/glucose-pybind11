@@ -57,6 +57,9 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 using namespace Glucose;
 
+#if defined(_MSC_VER) || defined(__MINGW32__)
+#define putc_unlocked _putc_nolock
+#endif
 
 //=================================================================================================
 // Statistics
