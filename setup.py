@@ -95,12 +95,13 @@ class BuildExt(build_ext):
             ext.extra_compile_args = opts
         build_ext.build_extensions(self)
 
+
 setup(
     name='pyglucose',
     version=__version__,
     author='Masahiro Sakai',
-    author_email = "masahiro.sakai@gmail.com",
-    url = "https://github.com/msakai/glucose-pybind11",
+    author_email="masahiro.sakai@gmail.com",
+    url="https://github.com/msakai/glucose-pybind11",
     description='pybind11-based binding of glucose SAT solver',
     long_description='',
     ext_modules=ext_modules,
