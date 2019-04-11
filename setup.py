@@ -102,6 +102,7 @@ setup(
     author='Masahiro Sakai',
     author_email="masahiro.sakai@gmail.com",
     url="https://github.com/msakai/glucose-pybind11",
+    license='MIT License',
     description='pybind11-based binding of glucose SAT solver',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
