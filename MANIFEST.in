@@ -1,2 +1,3 @@
+include README.md
 include LICENSE
 graft glucose-syrup-4.1
