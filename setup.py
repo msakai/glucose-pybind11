@@ -1,3 +1,4 @@
+import platform
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 import sys
@@ -73,26 +74,27 @@ def cpp_flag(compiler):
 
 class BuildExt(build_ext):
     """A custom build extension for adding compiler-specific options."""
-    c_opts = {
-        'msvc': ['/EHsc'],
-        'unix': [],
-    }
-
-    if sys.platform == 'darwin':
-        c_opts['unix'] += ['-stdlib=libc++', '-mmacosx-version-min=10.7']
 
     def build_extensions(self):
+        c_opts = []
+        l_opts = []
+
         ct = self.compiler.compiler_type
-        opts = self.c_opts.get(ct, [])
         if ct == 'unix':
-            opts.append('-DVERSION_INFO="%s"' % self.distribution.get_version())
-            opts.append(cpp_flag(self.compiler))
+            c_opts.append('-DVERSION_INFO="%s"' % self.distribution.get_version())
+            c_opts.append(cpp_flag(self.compiler))
             if has_flag(self.compiler, '-fvisibility=hidden'):
-                opts.append('-fvisibility=hidden')
+                c_opts.append('-fvisibility=hidden')
+            if sys.platform == 'darwin':
+                c_opts += ['-stdlib=libc++', '-mmacosx-version-min=10.7']
+                l_opts += ['-stdlib=libc++', '-mmacosx-version-min=10.7']
         elif ct == 'msvc':
-            opts.append('/DVERSION_INFO=\\"%s\\"' % self.distribution.get_version())
+            c_opts.append('/EHsc')
+            c_opts.append('/DVERSION_INFO=\\"%s\\"' % self.distribution.get_version())
+
         for ext in self.extensions:
-            ext.extra_compile_args = opts
+            ext.extra_compile_args = c_opts
+            ext.extra_link_args = l_opts
         build_ext.build_extensions(self)
 
 
