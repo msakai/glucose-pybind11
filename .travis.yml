@@ -62,4 +62,4 @@ install:
   fi
 
 script:
-- python3 test.py
+- python3 tests/test_pyglucose.py

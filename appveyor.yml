@@ -40,6 +40,6 @@ build_script:
     conda install --use-local pyglucose
   )
 test_script:
-- ps: python test.py
+- python tests\test_pyglucose.py
 artifacts:
 - path: 'dist/*.whl'
