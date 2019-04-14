@@ -21,7 +21,7 @@ install:
       $env:PATH = "C:\Miniconda$env:CONDA\;C:\Miniconda$env:CONDA\Scripts\;$env:PATH"
     }
 - if defined PYTHON (
-    pip install --disable-pip-version-check --user --upgrade pip setuptools wheel
+    pip install --disable-pip-version-check --user --upgrade pip setuptools wheel pybind11
   ) else (
     conda config --set always_yes yes --set changeps1 no &&
     conda config --add channels conda-forge &&
