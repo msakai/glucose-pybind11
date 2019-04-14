@@ -33,7 +33,7 @@ build_script:
 - git submodule update
 - if defined PYTHON (
     python setup.py sdist &&
-    pip install --verbose dist\pyglucose-0.0.1.tar.gz &&
+    for %%f in (dist\*.tar.gz) do (pip install --verbose %%f) &&
     python setup.py bdist_wheel
   ) else (
     conda build conda.recipe &&
